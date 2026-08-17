@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Dashboard | श्री राम आपले सरकार सेवा केंद्र</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.admin{min-height:100vh;background:#f6f8fb}.adminbar{background:#19243a;color:#fff;padding:18px 0}.adminbar .container{display:flex;justify-content:space-between;align-items:center}.dash{padding:45px 0}.panel{background:#fff;border:1px solid #e5e9ef;border-radius:18px;padding:25px;margin-bottom:20px}.logout{border:0;background:#e55d00;color:#fff;padding:9px 15px;border-radius:8px;font-weight:800;cursor:pointer}.status{padding:14px;background:#edf9f1;color:#177343;border-radius:10px;margin-top:15px}
+</style>
+</head>
+<body class="admin">
+<div class="adminbar"><div class="container"><strong>🔐 श्री राम सेवा केंद्र — Admin Dashboard</strong><button class="logout" onclick="logout()">Logout</button></div></div>
+<div class="container dash">
+<div class="panel"><h2>स्वागत आहे!</h2><p>तुम्ही Admin Panel मध्ये यशस्वीपणे Login झाला आहात.</p><div class="status">✓ Login session सक्रिय आहे.</div></div>
+<div class="panel"><h3>केंद्राची माहिती</h3><p><strong>नाव:</strong> श्री राम आपले सरकार सेवा केंद्र</p><p><strong>पत्ता:</strong> उर्धुळ, ता. चांदवड, जि. नाशिक</p><p><strong>मोबाईल:</strong> 7066026760</p></div>
+<div class="panel"><h3>पुढील Admin सुविधा</h3><p>या पॅनेलमध्ये पुढील टप्प्यात सेवा, सूचना, पोस्टर, फोटो आणि संपर्क माहिती थेट बदलण्याची सुविधा जोडता येईल.</p></div>
+</div>
+<script>
+async function check(){const r=await fetch('/api/session');const d=await r.json();if(!d.ok)location.href='login.html';}
+async function logout(){await fetch('/api/logout',{method:'POST'});location.href='login.html';}
+check();
+</script>
+</body>
+</html>

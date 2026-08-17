@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Login | श्री राम आपले सरकार सेवा केंद्र</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.login-page{min-height:100vh;display:grid;place-items:center;padding:30px;background:linear-gradient(135deg,#fff8ef,#f3f6ff)}
+.login-box{width:min(430px,94%);background:#fff;padding:34px;border-radius:24px;box-shadow:0 20px 60px rgba(25,38,63,.12);border:1px solid #e8ecf2}
+.login-box img{display:block;width:105px;height:105px;object-fit:contain;margin:0 auto 12px}
+.login-box h1{text-align:center;font-size:25px;margin:5px 0}
+.login-box p{text-align:center;color:#6b7587;margin-bottom:24px}
+.field{margin:14px 0}.field label{display:block;font-weight:800;margin-bottom:6px}
+.field input{width:100%;padding:13px 14px;border:1px solid #dfe4eb;border-radius:10px;font-size:16px;outline:none}
+.field input:focus{border-color:#e55d00;box-shadow:0 0 0 3px #fff0df}
+.login-btn{width:100%;border:0;cursor:pointer;padding:13px;border-radius:10px;background:#e55d00;color:#fff;font-size:16px;font-weight:800;margin-top:10px}
+.error{display:none;background:#fff0f0;color:#c62828;padding:10px;border-radius:9px;margin-top:14px;text-align:center}
+.back{display:block;text-align:center;margin-top:18px;color:#e55d00;font-weight:800}
+.security{font-size:12px!important;margin:15px 0 0!important;color:#8791a1!important}
+</style>
+</head>
+<body>
+<div class="login-page">
+<div class="login-box">
+<img src="logo.png" alt="श्री राम सेवा केंद्र">
+<h1>Admin Login</h1>
+<p>श्री राम आपले सरकार सेवा केंद्र</p>
+<form id="loginForm">
+<div class="field"><label>Login ID</label><input id="loginId" autocomplete="username" required></div>
+<div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" required></div>
+<button class="login-btn" type="submit">Login करा</button>
+<div id="error" class="error">Login ID किंवा Password चुकीचा आहे.</div>
+</form>
+<a class="back" href="index.html">← मुख्य वेबसाइटवर जा</a>
+<p class="security">ही लॉगिन सुविधा Admin पेजसाठी आहे.</p>
+</div>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const id=document.getElementById('loginId').value.trim();
+  const password=document.getElementById('password').value;
+  try{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,password})});
+    const data=await r.json();
+    if(data.ok){location.href='admin.html';}
+    else document.getElementById('error').style.display='block';
+  }catch(e){document.getElementById('error').style.display='block';}
+});
+</script>
+</body>
+</html>
